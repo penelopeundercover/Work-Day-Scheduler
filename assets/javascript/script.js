@@ -14,11 +14,14 @@ $(document).ready(function () {
     var userInput = $(this).siblings(".description").val();
     var time = $(this).parent().attr("id");
     //Set
-    localStorage.setItem(userInput, time);
+    console.log(userInput, time);
+    localStorage.setItem(time, userInput);
   });
 });
 
 //Getting the time values for each time block
+console.log(localStorage.getItem("9"));
+console.log(localStorage.getItem("10"));
 $("#9 .description").val(localStorage.getItem("9"));
 $("#10 .description").val(localStorage.getItem("10"));
 $("#11 .description").val(localStorage.getItem("11"));
@@ -36,22 +39,27 @@ function currentTime() {
 
   block.each(function () {
     var hour = parseInt($(this).attr("id"));
-  });
 
-  //Connecting time to class styling for the color-coded blocks
-  if (block > current) {
-    $(this).addClass("past");
-    $(this).removeClass("future");
-    $(this).removeClass("present");
-  } else if (block === current) {
-    $(this).addClass("present");
-    $(this).removeClass("past");
-    $(this).removeClass("future");
-  } else if (block < current) {
-    $(this).addClass("future");
-    $(this).removeClass("past");
-    $(this).removeClass("present");
-  }
+    //Connecting time to class styling for the color-coded blocks
+    console.log(hour);
+    console.log("current", current);
+    if (hour < current) {
+      console.log("past", hour);
+      $(this).addClass("past");
+      $(this).removeClass("future");
+      $(this).removeClass("present");
+    } else if (hour === current) {
+      console.log("present", hour);
+      $(this).addClass("present");
+      $(this).removeClass("past");
+      $(this).removeClass("future");
+    } else if (hour > current) {
+      console.log("future", hour);
+      $(this).addClass("future");
+      $(this).removeClass("past");
+      $(this).removeClass("present");
+    }
+  });
 }
 
 currentTime();
